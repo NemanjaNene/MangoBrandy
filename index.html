@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mango Rakia — Caribbean Voyage</title>
+<meta name="description" content="Premium single-fruit mango rakia. Distilled in the Dominican Republic, voyaging to Europe.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme:{ extend:{
+      colors:{ ink:'#2A2A28', parchment:'#F4EAD2', parchmentDeep:'#ECD8AE', brass:'#A57C3B', gold:'#C7A36A', slate:'#6B6B66' },
+      boxShadow:{ soft:'0 18px 50px rgba(0,0,0,.12)' }
+    }}
+  }
+</script>
+<style>
+  body{ background:#F4EAD2; color:#2A2A28; }
+  .wrap{max-width:1200px;margin:0 auto;padding:0 1.25rem}
+  .serif{font-family:"Playfair Display", Georgia, serif}
+  .sans{font-family:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif}
+
+  /* Light parchment bg */
+  .parchment{
+    position:fixed; inset:-8% -8% -8% -8%; z-index:-3;
+    background:
+      radial-gradient(70% 80% at 30% 10%, #FFF7E1, transparent 70%),
+      radial-gradient(70% 80% at 80% 25%, #ECD8AE, transparent 70%),
+      radial-gradient(90% 80% at 50% 100%, #F6E6C3, transparent 70%),
+      #F4EAD2;
+    filter:saturate(105%);
+    animation: drift 24s ease-in-out infinite alternate;
+  }
+  @keyframes drift{0%{transform:translateY(0)}100%{transform:translateY(.6%)}}
+
+  /* Local (hero-only) map grid */
+  .mapwash{position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.12; mix-blend-mode:multiply; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'><g fill='none' stroke='%236f5b2d' stroke-opacity='.35' stroke-width='0.8'><g stroke-dasharray='2 8' stroke-opacity='.35'><path d='M0,80 H1200'/><path d='M0,160 H1200'/><path d='M0,240 H1200'/><path d='M0,320 H1200'/><path d='M0,400 H1200'/><path d='M0,480 H1200'/></g><g stroke-dasharray='2 8' stroke-opacity='.35'><path d='M120,0 V800'/><path d='M300,0 V800'/><path d='M480,0 V800'/><path d='M660,0 V800'/><path d='M840,0 V800'/><path d='M1020,0 V800'/></g></g></svg>"); background-size:cover; }
+
+  /* Paper grain */
+  .grain{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.16; mix-blend-mode:multiply; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 .22 0'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+  /* links */
+  .link{ position:relative; }
+  .link:after{ content:""; position:absolute; left:0; bottom:-3px; width:100%; height:2px; background:linear-gradient(90deg, transparent, #A57C3B, transparent); transform:scaleX(0); transform-origin:left; transition:.35s ease; }
+  .link:hover:after{ transform:scaleX(1); }
+
+  .panel{ background:rgba(255,255,255,.55); border:1px solid rgba(165,124,59,.25); border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,.06); }
+  .mapCard{ background:rgba(255,255,255,.55); border:1px solid rgba(165,124,59,.28); backdrop-filter: blur(6px); border-radius:18px; box-shadow:0 18px 50px rgba(0,0,0,.08); }
+
+  .routeGlobal{ fill:none; stroke:#A57C3B; stroke-width:2.6; stroke-linecap:round; stroke-dasharray:6 8; }
+  .ship{ filter: drop-shadow(0 4px 10px rgba(0,0,0,.25)); }
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.85rem 1.2rem; border-radius:999px; border:1px solid rgba(165,124,59,.35); background:linear-gradient(180deg, #FFFFFFAA, #FFFFFF66); color:#2A2A28; font-weight:700; letter-spacing:.3px; transition:transform .2s ease, box-shadow .3s ease, border-color .2s ease; }
+  .btn:hover{ transform:translateY(-1px); box-shadow:0 14px 40px rgba(0,0,0,.18); }
+  .btn--gold{ background:linear-gradient(180deg, #C7A36A, #A57C3B); color:#fff; border-color:transparent }
+
+  .shadow-ring{background:radial-gradient(closest-side, rgba(0,0,0,.25), transparent 70%); filter:blur(8px)}
+  .reveal{opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease}
+  .reveal.shown{opacity:1; transform:translateY(0)}
+
+  /* Compass */
+  .compass{ position:relative; pointer-events:none; opacity:.55; }
+  .compass svg{ width:100%; height:100%; filter: drop-shadow(0 12px 24px rgba(0,0,0,.12)); }
+  .compass .spin{ animation:spin 28s linear infinite; transform-origin:50% 50%; }
+  @keyframes spin{ from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+  /* Kill legacy pseudo-element maps (ako neki theme ubacuje background) */
+  .mapCard::before,
+  .mapCard::after { content: none !important; background: none !important; }
+  /* ———————————— ROLLER SHUTTER INTRO ———————————— */
+  .shutter{ position:fixed; inset:0; z-index:60; display:grid; grid-template-rows:repeat(7,1fr); pointer-events:none; background:#0e0e0e; }
+  .shutter__panel{ background:#0e0e0e; transform:translateY(0); animation:shutterUp .8s ease forwards; }
+  @keyframes shutterUp{ to{ transform:translateY(-110%); } }
+
+  /* ———————————— CINEMATIC PANEL (replaces map) ———————————— */
+  .cinematicPanel{ position:relative; border-radius:18px; overflow:hidden; background:linear-gradient(180deg,#d9bf8c,#b98a4e); box-shadow:0 18px 50px rgba(0,0,0,.08); }
+  .cinematicPanel img{ width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.06) saturate(1.06); }
+  .cinematicPanel::after{ content:""; position:absolute; inset:0; background:linear-gradient(70deg, rgba(255,255,255,.0) 30%, rgba(255,255,255,.18) 48%, rgba(255,255,255,.0) 66%); transform:translateX(-120%); animation:glare 4s ease-in-out 1.1s forwards; }
+  @keyframes glare{ to{ transform:translateX(120%); } }
+  .cinematicOverlay{ position:absolute; left:0; right:0; bottom:0; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:12px; background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.35) 38%, rgba(0,0,0,.55) 100%); color:#fff; }
+  .cinematicOverlay h4{ font-family:"Playfair Display", Georgia, serif; font-weight:800; font-size:clamp(18px,2vw,24px); letter-spacing:.4px; }
+  /* ———————————— SLIDESHOW (inside cinematicPanel) ———————————— */
+  .slider{ position:relative; width:100%; height:100%; }
+  .slide{ position:absolute; inset:0; opacity:0; transition:opacity .6s ease; }
+  .slide.is-active{ opacity:1; }
+  .slide img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .slider .nav{ position:absolute; top:50%; transform:translateY(-50%); z-index:3; display:flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:999px; border:1px solid rgba(255,255,255,.45); background:rgba(0,0,0,.25); color:#fff; font-weight:700; }
+  .slider .nav:hover{ background:rgba(0,0,0,.38); }
+  .slider .prev{ left:10px; }
+  .slider .next{ right:10px; }
+  .slider .dots{ position:absolute; left:12px; right:12px; bottom:10px; display:flex; gap:6px; justify-content:flex-end; z-index:3; }
+  .slider .dot{ width:8px; height:8px; border-radius:999px; background:rgba(255,255,255,.35); border:1px solid rgba(255,255,255,.65); }
+  .slider .dot.is-active{ background:#fff; }
+</style>
+ 
+</style>
+</style>
+</head>
+<body class="sans">
+
+<div id="shutter" class="shutter" aria-hidden="true">
+  <div class="shutter__panel" style="animation-delay:.00s"></div>
+  <div class="shutter__panel" style="animation-delay:.05s"></div>
+  <div class="shutter__panel" style="animation-delay:.10s"></div>
+  <div class="shutter__panel" style="animation-delay:.15s"></div>
+  <div class="shutter__panel" style="animation-delay:.20s"></div>
+  <div class="shutter__panel" style="animation-delay:.25s"></div>
+  <div class="shutter__panel" style="animation-delay:.30s"></div>
+</div>
+
+<div class="parchment"></div>
+<div class="grain"></div>
+
+<!-- NAV -->
+<header class="sticky top-0 z-20 border-b border-brass/20 backdrop-blur bg-[#fff6]/70">
+  <div class="wrap py-3 flex items-center justify-between">
+    <a href="#hero" class="serif text-xl font-extrabold text-ink tracking-wide">Mango Rakia</a>
+    <nav class="hidden md:flex items-center gap-6 text-ink/80">
+      <a href="#product" class="link">Product</a>
+      <a href="#voyage"  class="link">The Voyage</a>
+      <a href="#story"   class="link">Heritage</a>
+      <a href="#contact" class="link">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero" class="wrap pt-6 md:pt-8 pb-10 md:pb-14 grid md:grid-cols-2 gap-10 items-center relative">
+  <div class="mapwash absolute inset-0 -z-10"></div>
+
+  <div class="relative reveal" style="z-index:1">
+    <p class="uppercase text-sm tracking-[.25em] text-slate">Dominican Republic · Small Batch</p>
+    <h1 class="serif text-5xl md:text-7xl font-extrabold mt-1 text-ink leading-tight">Mango Rakia</h1>
+    <p class="text-ink/85 mt-4 max-w-xl leading-relaxed">
+      Precision-distilled mango brandy. Crystal finish, natural color. Crafted on the island; destined for refined palates.
+    </p>
+    <div class="mt-6 flex gap-3">
+      <a href="#voyage" class="btn">View the voyage</a>
+      <a href="#buy" class="btn btn--gold">Order</a>
+    </div>
+
+    <div class="compass w-56 h-56 md:w-72 md:h-72 lg:w-96 lg:h-96 mt-6" aria-hidden="true">
+      <!-- (kompas SVG ostaje isti) -->
+      <svg class="spin" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="brassFace" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(110 110) scale(108)">
+            <stop offset="0" stop-color="#fff6e6"/>
+            <stop offset="1" stop-color="#e6cf9f"/>
+          </radialGradient>
+          <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#caa367"/>
+            <stop offset="1" stop-color="#a2773f"/>
+          </linearGradient>
+          <linearGradient id="needle" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#8b6633"/>
+            <stop offset="1" stop-color="#caa367"/>
+          </linearGradient>
+        </defs>
+        <circle cx="110" cy="110" r="104" fill="url(#rim)"/>
+        <circle cx="110" cy="110" r="98" fill="url(#brassFace)" stroke="#a2773f" stroke-width="1.5"/>
+        <circle cx="110" cy="110" r="86" fill="none" stroke="#a2773f" stroke-width="1" stroke-dasharray="2 7" opacity=".7"/>
+        <polygon points="110,20 124,110 110,200 96,110" fill="#a2773f"/>
+        <polygon points="20,110 110,96 200,110 110,124" fill="#a2773f" opacity=".75"/>
+        <g fill="#a2773f" font-family="Playfair Display, Georgia, serif" font-size="18" font-weight="700">
+          <text x="110" y="40" text-anchor="middle">N</text>
+          <text x="110" y="188" text-anchor="middle">S</text>
+          <text x="36" y="114" text-anchor="middle">W</text>
+          <text x="184" y="114" text-anchor="middle">E</text>
+        </g>
+        <g>
+          <polygon points="110,36 116,110 110,160 104,110" fill="url(#needle)"/>
+          <polygon points="110,60 140,112 110,118 80,112" fill="#8b6633" opacity=".55"/>
+          <circle cx="110" cy="110" r="8" fill="#d8c29a" stroke="#a2773f"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="relative min-h-[520px] reveal">
+    <!-- Bottle block (ostaje) -->
+    <div class="absolute" style="--bottle:1.8; --dx:50px; --by:-450px; left:50%; bottom:var(--by); transform: translateX(calc(-50% + var(--dx))) scale(var(--bottle)); transform-origin:center bottom; will-change: transform; z-index:2;">
+      <div class="relative w-[420px] h-[680px] md:w-[460px] md:h-[740px]">
+        <img id="bottleImg" alt="Bottle" class="block w-full h-full object-contain" src="assets/bottles/Mango.png">
+        <script>
+          (function(){
+            const el=document.getElementById('bottleImg');
+            const candidates=[
+              './Mango.png','./mango.png',
+              './assets/bottles/Mango.png','./assets/bottles/mango.png',
+              './assets/Mango.png','./assets/mango.png',
+              '/Mango.png','/mango.png','/assets/bottles/Mango.png','/assets/Mango.png'
+            ];
+            const FALLBACK="data:image/svg+xml;utf8,"
+            + encodeURIComponent(`<?xml version='1.0'?>
+              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 740'>
+                <defs>
+                  <linearGradient id='g' x1='0' y1='0' x2='0' y2='1'>
+                    <stop offset='0%' stop-color='#f6e9c7'/>
+                    <stop offset='100%' stop-color='#e2c28f'/>
+                  </linearGradient>
+                </defs>
+                <rect x='60' y='40' width='200' height='640' rx='40' fill='url(%23g)' stroke='#b98a4e' stroke-width='6'/>
+                <rect x='120' y='0' width='80' height='60' rx='10' fill='#c88938'/>
+                <text x='160' y='380' font-family='Inter, sans-serif' font-weight='700' font-size='56' text-anchor='middle' fill='#ffffff'>MANGO</text>
+              </svg>`);
+            function tryNext(i){
+              if(i>=candidates.length){ el.src=FALLBACK; return; }
+              const test=new Image();
+              test.onload=()=>{ el.src=candidates[i]; };
+              test.onerror=()=> tryNext(i+1);
+              test.src=candidates[i];
+              console.log('[BOTTLE probe]', candidates[i]);
+            }
+            el.addEventListener('error', ()=> tryNext(1), { once:true });
+            tryNext(0);
+          })();
+        </script>
+      </div>
+      <div class="shadow-ring absolute left-0 right-0 mx-auto -bottom-7 h-9 rounded-full opacity-70 w-[80%]"></div>
+    </div>
+
+    <!-- Quick spec panel -->
+    <div class="panel absolute left-1/2 -bottom-14 px-4 py-3 text-sm text-ink/90"
+     style="transform:translateX(250%);">
+        <div><div class="text-slate">ABV</div><div class="font-semibold">40%</div></div>
+        <div><div class="text-slate">Volume</div><div class="font-semibold">700 ml</div></div>
+        <div><div class="text-slate">Serve</div><div class="font-semibold">Ice cold</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story" class="wrap py-10 md:py-14 grid md:grid-cols-2 gap-8 items-start">
+  <article class="panel p-6 md:p-8 reveal">
+    <p class="uppercase text-xs tracking-[.35em] text-slate">Heritage</p>
+    <h2 class="serif text-3xl md:text-4xl font-extrabold mt-2">From Island Roots</h2>
+    <p class="text-ink/85 mt-4 leading-relaxed">
+      Mango Rakia begins on family groves outside Puerto Plata. Generations of growers perfected
+      mango varieties for sweetness and acidity, giving the distillate its bright aromatics. Local
+      cooperages still toast the casks that rest the spirit before its Atlantic voyage.
+    </p>
+    <p class="text-ink/80 mt-4 leading-relaxed">
+      Each batch honours Caribbean craft – from small fermentation lots to copper still distillation
+      and patient proofing. The result is a single-fruit rakia that carries the warmth of the island
+      to every glass poured abroad.
+    </p>
+  </article>
+  <aside class="panel p-6 md:p-8 space-y-5 reveal">
+    <div>
+      <div class="serif text-xl font-extrabold text-ink">Craft Notes</div>
+      <ul class="mt-3 space-y-2 text-ink/85">
+        <li>• Handpicked mangoes at peak ripeness</li>
+        <li>• Slow copper pot distillation</li>
+        <li>• Proofed with limestone-filtered water</li>
+      </ul>
+    </div>
+    <div>
+      <div class="serif text-xl font-extrabold text-ink">Voyage Legacy</div>
+      <p class="text-ink/80 leading-relaxed">
+        Inspired by 18th century trade winds, each shipment traces the classic Dominican-to-Europe
+        passage, ensuring consistent climate and maturation en route.
+      </p>
+    </div>
+  </aside>
+</section>
+
+<!-- THE VOYAGE -->
+<section id="voyage" class="wrap py-10 md:py-14">
+  <div class="grid md:grid-cols-3 gap-6 items-start">
+    <div class="md:col-span-2 mapCard p-4 md:p-6 shadow-soft">
+      <h2 class="serif text-2xl md:text-3xl font-extrabold mb-3">The Voyage</h2>
+      <p class="text-ink/80 mb-4">From the Dominican Republic across the Atlantic to Europe — a heritage route retold.</p>
+      <div class="relative">
+        <div class="cinematicPanel" style="aspect-ratio:16/9;">
+          <div id="voyageSlider" class="slider" aria-label="Mango Rakia gallery" aria-live="polite">
+            <!-- Put your images in /assets/slider/ as 01.jpg, 02.jpg, 03.jpg... -->
+            <div class="slide is-active"><img src="assets/bottles/Screenshot 2025-09-25 at 15.04.31.png" alt="Mango Rakia image 1"></div>
+            <div class="slide"><img src="assets/bottles/Screenshot 2025-09-25 at 15.04.49.png" alt="Mango Rakia image 2"></div>
+            <div id="voyageDots" class="dots" role="tablist"></div>
+          </div>
+          <div class="cinematicOverlay">
+            <h4 class="serif">Caribbean craft, European finish</h4>
+            <span class="badge">Small Batch · 40% ABV</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <aside class="panel p-5">
+      <h3 class="serif text-xl font-extrabold mb-2">Craft & Journey</h3>
+      <p class="text-ink/80 leading-relaxed">Selected mangoes, careful fermentation, copper stills — and a transatlantic route that honors classic trade winds.</p>
+      <ul class="mt-4 space-y-2 text-ink/85">
+        <li>• Small batch, crystal finish</li>
+        <li>• Natural color — no dyes</li>
+        <li>• Balanced to sip or mix</li>
+      </ul>
+      <a class="btn mt-4" href="#buy">Secure allocation</a>
+    </aside>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section id="product" class="wrap py-10 md:py-14">
+  <div class="grid md:grid-cols-3 gap-6">
+    <article class="panel p-6 md:col-span-2 reveal">
+      <h2 class="serif text-2xl md:text-3xl font-extrabold mb-2">Mango Rakia</h2>
+      <p class="text-ink/85">Bright mango nose, hint of citrus and vanilla from the cut. Silky body; clean, mineral finish.</p>
+      <div class="grid sm:grid-cols-3 gap-3 mt-4 text-ink/90">
+        <div class="panel p-4"><div class="text-slate">ABV</div><div class="font-semibold">40%</div></div>
+        <div class="panel p-4"><div class="text-slate">Volume</div><div class="font-semibold">700 ml</div></div>
+        <div class="panel p-4"><div class="text-slate">Serve</div><div class="font-semibold">Neat / Ice cold</div></div>
+      </div>
+    </article>
+    <article class="panel p-6 reveal">
+      <h3 class="serif text-xl font-extrabold mb-2">Tasting</h3>
+      <ul class="space-y-2 text-ink/90">
+        <li>• Fresh mango, citrus zest</li>
+        <li>• Silky mouthfeel</li>
+        <li>• Crystal, dry finish</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="buy" class="wrap py-10 md:py-16 text-center">
+  <h2 class="serif text-3xl md:text-4xl font-extrabold">Secure Your Bottle</h2>
+  <p class="text-ink/80 mt-2">Limited allocations available for Europe.</p>
+  <a id="cta" href="#contact" class="btn btn--gold mt-5">Contact & Orders</a>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact" class="wrap py-10 border-t border-brass/20">
+  <div class="grid md:grid-cols-3 gap-6">
+    <div>
+      <div class="serif text-xl font-extrabold">Contact</div>
+      <p class="text-ink/85 mt-2">hello@mangorakia.com</p>
+      <p class="text-slate mt-1">Dominican Republic</p>
+    </div>
+    <div>
+      <div class="serif text-xl font-extrabold">Follow</div>
+      <p class="text-ink/85 mt-2">@mangorakia</p>
+    </div>
+    <div>
+      <div class="serif text-xl font-extrabold">Legal</div>
+      <p class="text-slate mt-2">© <span id="year"></span> Mango Rakia. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Year */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* Reveal */
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('shown');io.unobserve(en.target)}}),{threshold:.18});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+
+(function(){
+  const s = document.getElementById('shutter');
+  if(!s) return;
+  if(sessionStorage.getItem('shutterPlayed')){ s.remove(); return; }
+  // When the last panel finishes, remove the shutter and mark played
+  const panels = s.querySelectorAll('.shutter__panel');
+  const last = panels[panels.length-1];
+  last.addEventListener('animationend', ()=>{
+    s.remove();
+    sessionStorage.setItem('shutterPlayed','1');
+  });
+})();
+
+
+/* Voyage slideshow */
+(function(){
+  const root = document.getElementById('voyageSlider');
+  if(!root) return;
+  const slides = Array.from(root.querySelectorAll('.slide'));
+  const dotsWrap = document.getElementById('voyageDots');
+  const prev = root.querySelector('.prev');
+  const next = root.querySelector('.next');
+  let order = slides.map((s,i)=>({el:s, i, ok:false}));
+  let active = 0, timer = null, HOVER = false, INTERVAL = 4000;
+
+  // remove slides whose images fail to load
+  let pending = slides.length;
+  slides.forEach((s,idx)=>{
+    const img = s.querySelector('img');
+    if(!img) { s.remove(); order = order.filter(o=>o.el!==s); pending--; return; }
+    img.addEventListener('load', ()=>{ mark(idx,true); });
+    img.addEventListener('error', ()=>{ mark(idx,false); });
+    // trigger if already cached
+    if(img.complete){ mark(idx, img.naturalWidth>0); }
+  });
+
+  function mark(idx, ok){
+    const o = order[idx]; if(!o) return; o.ok = !!ok; pending = Math.max(0, pending-1);
+    if(pending===0) init();
+  }
+
+  function init(){
+    // filter out failed images
+    order = order.filter(o=>o.ok);
+    if(order.length===0){ root.innerHTML = '<div class="slide is-active"><img alt="fallback" src="data:image/svg+xml;utf8,'+ encodeURIComponent('<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1600 900\'><defs><linearGradient id=\'g\' x1=\'0\' y1=\'0\' x2=\'0\' y2=\'1\'><stop offset=\'0%\' stop-color=\'#d9bf8c\'/><stop offset=\'100%\' stop-color=\'#b98a4e\'/></linearGradient></defs><rect width=\'100%\' height=\'100%\' fill=\'url(%23g)\'/><text x=\'800\' y=\'470\' text-anchor=\'middle\' font-family=\'Inter, Arial\' font-size=\'56\' font-weight=\'700\' fill=\'rgba(0,0,0,.45)\'>MANGO RAKIA</text></svg>') +'"/></div>'; return; }
+
+    // build dots
+    dotsWrap.innerHTML = '';
+    order.forEach((_,i)=>{
+      const d = document.createElement('button');
+      d.className = 'dot'+(i===0?' is-active':'');
+      d.type = 'button'; d.setAttribute('aria-label','Go to slide '+(i+1));
+      d.addEventListener('click', ()=> go(i));
+      dotsWrap.appendChild(d);
+    });
+
+    // show first
+    order.forEach((o,i)=>{ o.el.classList.toggle('is-active', i===0); });
+
+    // autoplay
+    play();
+
+    // controls
+    prev.addEventListener('click', ()=> go(active-1));
+    next.addEventListener('click', ()=> go(active+1));
+
+    // pause on hover/touch
+    root.addEventListener('mouseenter', ()=>{ HOVER=true; stop(); });
+    root.addEventListener('mouseleave', ()=>{ HOVER=false; play(); });
+
+    // swipe
+    let sx=0, dx=0; root.addEventListener('touchstart',e=>{ sx=e.touches[0].clientX; stop(); },{passive:true});
+    root.addEventListener('touchmove', e=>{ dx=e.touches[0].clientX - sx; },{passive:true});
+    root.addEventListener('touchend', ()=>{ if(Math.abs(dx)>40){ dx>0? go(active-1): go(active+1);} dx=0; if(!HOVER) play(); });
+
+    // keyboard
+    root.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') go(active-1); if(e.key==='ArrowRight') go(active+1); });
+    root.tabIndex = 0;
+  }
+
+  function go(n){
+    if(order.length===0) return;
+    const nextIndex = (n+order.length)%order.length;
+    if(nextIndex===active) return;
+    order[active].el.classList.remove('is-active');
+    order[nextIndex].el.classList.add('is-active');
+    const dotEls = dotsWrap.querySelectorAll('.dot');
+    dotEls[active]?.classList.remove('is-active');
+    dotEls[nextIndex]?.classList.add('is-active');
+    active = nextIndex;
+    if(!HOVER){ restart(); }
+  }
+
+  function play(){ stop(); timer = setInterval(()=> go(active+1), INTERVAL); }
+  function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+  function restart(){ stop(); play(); }
+})();
+
+/* Metallic confetti (discreet) */
+(function(){
+  const btn=document.getElementById('cta'); if(!btn) return;
+  const c=document.createElement('canvas'); c.style.position='fixed'; c.style.inset='0'; c.style.pointerEvents='none'; c.style.zIndex='10'; document.body.appendChild(c); const x=c.getContext('2d'); function R(){c.width=innerWidth;c.height=innerHeight} R(); addEventListener('resize',R);
+  btn.addEventListener('click',e=>{ const r=btn.getBoundingClientRect(); burst(r.left+r.width/2, r.top+r.height/2); });
+  function burst(X,Y){ const cols=['#C7A36A','#A57C3B','#8F6E3F','#E8DCC6']; const P=Array.from({length:80},()=>({x:X,y:Y,vx:(Math.random()-0.5)*6,vy:(Math.random()-1.1)*8,g:.22,a:1,s:1.5+Math.random()*2.2,c:cols[Math.random()*cols.length|0],r:Math.random()*Math.PI})); let f=0;(function step(){f++;x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.a*=0.992;p.r+=0.08;x.save();x.globalAlpha=p.a;x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s,-p.s,p.s*2,p.s*2);x.restore();}); if(f<180) requestAnimationFrame(step); else x.clearRect(0,0,c.width,c.height); })(); }
+})();
+
+/* Quiet IMG 404 during probing */
+window.addEventListener('error', (e)=>{
+  if (e.target && e.target.tagName === 'IMG') { e.preventDefault(); }
+}, true);
+</script>
+
+</body>
+</html>
