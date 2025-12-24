@@ -1,0 +1,44 @@
+<!-- ========================================
+     HEADER & NAVIGATION
+     ======================================== -->
+
+<!-- NAVIGATION -->
+<header class="sticky top-0 z-50 backdrop-blur-xl bg-parchment/80 border-b border-gold/10 shadow-sm">
+  <div class="wrap">
+    <div class="flex items-center justify-between py-4">
+      <!-- Logo -->
+      <a href="#hero" class="serif text-2xl md:text-3xl font-black text-ink tracking-tight hover:text-gold transition-colors">
+        <span class="bg-gradient-to-r from-gold to-brass bg-clip-text text-transparent">Mango Spirit</span>
+      </a>
+      
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-8">
+        <a href="#product" class="nav-link">Product</a>
+        <a href="#process" class="nav-link">Craft</a>
+        <a href="#voyage" class="nav-link">The Voyage</a>
+        <a href="#testimonials" class="nav-link">Reviews</a>
+    </nav>
+      
+      <!-- Mobile Menu Button -->
+      <button id="menuBtn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full bg-gold/10 hover:bg-gold/20 transition-colors" aria-label="Toggle menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu">
+  <button id="closeMenuBtn" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors" aria-label="Close menu">
+    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+  <a href="#product" class="mobile-menu-link" style="transition-delay: 0.1s">Product</a>
+  <a href="#process" class="mobile-menu-link" style="transition-delay: 0.15s">Craft</a>
+  <a href="#voyage" class="mobile-menu-link" style="transition-delay: 0.2s">The Voyage</a>
+  <a href="#testimonials" class="mobile-menu-link" style="transition-delay: 0.25s">Reviews</a>
+  <a href="#contact" class="btn btn-primary" style="transition-delay: 0.3s">Order Now</a>
+</div>

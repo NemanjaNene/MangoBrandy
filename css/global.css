@@ -1,0 +1,200 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: linear-gradient(135deg, #FAF6F0 0%, #F0E8D8 100%);
+  color: #1a1816;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+@media (max-width: 1024px) { .wrap { padding: 0 1.25rem; } }
+@media (max-width: 768px) { .wrap { padding: 0 1rem; } }
+
+.serif { font-family: "Playfair Display", Georgia, serif; }
+.sans { font-family: "Inter", system-ui, sans-serif; }
+.elegant { font-family: "Cormorant Garamond", Georgia, serif; }
+
+/* ========== LUXURY BACKGROUND ========== */
+.luxury-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(212,175,55,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255,140,0,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(184,134,11,0.04) 0%, transparent 70%),
+    linear-gradient(135deg, #FAF6F0 0%, #F0E8D8 50%, #FFF8E7 100%);
+  animation: drift 30s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-1%) scale(1.02); }
+}
+
+/* Paper grain texture */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: -9;
+  pointer-events: none;
+  opacity: 0.15;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='1.2' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+/* ========== VINTAGE WORLD MAP WATERMARK ========== */
+.pirate-map {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  width: 100vw;
+  height: 100vh;
+  z-index: -8;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3Cstyle%3E.map-line%7Bfill:none;stroke:%23654321;stroke-width:1.5;stroke-linecap:round%7D.map-text%7Bfill:%23654321;font-family:serif;font-weight:bold%7D.map-land%7Bfill:%23D4C4A8;stroke:%23654321;stroke-width:1%7D.map-ocean%7Bfill:%23E8E0D0%7D%3C/style%3E%3Cfilter id='aged'%3E%3CfeTurbulence baseFrequency='0.01' numOctaves='4'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='2'/%3E%3C/filter%3E%3C/defs%3E%3C!-- Ocean background --%3E%3Crect width='1200' height='800' class='map-ocean'/%3E%3C!-- North America --%3E%3Cpath class='map-land' d='M50,150 L200,120 L350,100 L500,120 L600,140 L650,180 L680,220 L700,280 L680,350 L650,400 L600,450 L550,480 L500,500 L450,520 L400,540 L350,560 L300,570 L250,580 L200,580 L150,570 L100,550 L80,500 L70,450 L60,400 L50,350 L45,300 L50,250 L50,200 Z'/%3E%3C!-- South America --%3E%3Cpath class='map-land' d='M200,400 L250,380 L300,370 L350,380 L400,400 L450,430 L480,470 L500,520 L480,570 L450,600 L400,620 L350,630 L300,620 L250,600 L200,570 L180,520 L170,470 L180,420 Z'/%3E%3C!-- Europe --%3E%3Cpath class='map-land' d='M800,200 L850,180 L900,190 L950,210 L1000,240 L1020,280 L1000,320 L950,340 L900,350 L850,340 L800,320 L780,280 L790,240 Z'/%3E%3C!-- Africa --%3E%3Cpath class='map-land' d='M850,350 L900,340 L950,360 L980,400 L970,450 L950,500 L920,550 L900,600 L870,620 L840,600 L820,550 L810,500 L820,450 L830,400 Z'/%3E%3C!-- Asia --%3E%3Cpath class='map-land' d='M950,150 L1000,140 L1050,160 L1100,180 L1150,200 L1180,240 L1150,280 L1100,300 L1050,320 L1000,340 L950,350 L920,320 L900,280 L910,240 L920,200 Z'/%3E%3C!-- Australia --%3E%3Cpath class='map-land' d='M1000,600 L1050,590 L1100,600 L1120,630 L1100,660 L1050,670 L1000,660 L980,630 Z'/%3E%3C!-- Grid lines --%3E%3Cg class='map-line' opacity='0.3'%3E%3Cpath d='M0,100 L1200,100' stroke-dasharray='2,3'/%3E%3Cpath d='M0,200 L1200,200' stroke-dasharray='2,3'/%3E%3Cpath d='M0,300 L1200,300' stroke-dasharray='2,3'/%3E%3Cpath d='M0,400 L1200,400' stroke-dasharray='2,3'/%3E%3Cpath d='M0,500 L1200,500' stroke-dasharray='2,3'/%3E%3Cpath d='M0,600 L1200,600' stroke-dasharray='2,3'/%3E%3Cpath d='M0,700 L1200,700' stroke-dasharray='2,3'/%3E%3Cpath d='M100,0 L100,800' stroke-dasharray='2,3'/%3E%3Cpath d='M200,0 L200,800' stroke-dasharray='2,3'/%3E%3Cpath d='M300,0 L300,800' stroke-dasharray='2,3'/%3E%3Cpath d='M400,0 L400,800' stroke-dasharray='2,3'/%3E%3Cpath d='M500,0 L500,800' stroke-dasharray='2,3'/%3E%3Cpath d='M600,0 L600,800' stroke-dasharray='2,3'/%3E%3Cpath d='M700,0 L700,800' stroke-dasharray='2,3'/%3E%3Cpath d='M800,0 L800,800' stroke-dasharray='2,3'/%3E%3Cpath d='M900,0 L900,800' stroke-dasharray='2,3'/%3E%3Cpath d='M1000,0 L1000,800' stroke-dasharray='2,3'/%3E%3Cpath d='M1100,0 L1100,800' stroke-dasharray='2,3'/%3E%3C/g%3E%3C!-- Ocean labels --%3E%3Ctext x='300' y='300' class='map-text' font-size='24' text-anchor='middle'%3EATLANTIC OCEAN%3C/text%3E%3Ctext x='800' y='300' class='map-text' font-size='24' text-anchor='middle'%3EPACIFIC OCEAN%3C/text%3E%3Ctext x='600' y='650' class='map-text' font-size='20' text-anchor='middle'%3ESOUTH SEA%3C/text%3E%3C!-- Continent labels --%3E%3Ctext x='300' y='250' class='map-text' font-size='28' text-anchor='middle'%3ENORTH AMERICA%3C/text%3E%3Ctext x='350' y='500' class='map-text' font-size='28' text-anchor='middle'%3ESOUTH AMERICA%3C/text%3E%3Ctext x='900' y='250' class='map-text' font-size='24' text-anchor='middle'%3EEUROPE%3C/text%3E%3Ctext x='900' y='450' class='map-text' font-size='24' text-anchor='middle'%3EAFRICA%3C/text%3E%3Ctext x='1050' y='250' class='map-text' font-size='24' text-anchor='middle'%3EASIA%3C/text%3E%3Ctext x='1050' y='650' class='map-text' font-size='20' text-anchor='middle'%3EAUSTRALIA%3C/text%3E%3C!-- Compass rose --%3E%3Cg transform='translate(1000,150)'%3E%3Ccircle cx='0' cy='0' r='40' fill='none' stroke='%23654321' stroke-width='2'/%3E%3Cpath d='M0,-35 L8,-12 L0,-18 L-8,-12 Z' fill='%23654321'/%3E%3Cpath d='M0,35 L8,12 L0,18 L-8,12 Z' fill='%23654321' opacity='0.5'/%3E%3Cpath d='M-35,0 L-12,-8 L-18,0 L-12,8 Z' fill='%23654321' opacity='0.5'/%3E%3Cpath d='M35,0 L12,-8 L18,0 L12,8 Z' fill='%23654321' opacity='0.5'/%3E%3Ctext x='0' y='-45' text-anchor='middle' class='map-text' font-size='16'%3EN%3C/text%3E%3Ctext x='0' y='55' text-anchor='middle' class='map-text' font-size='12'%3ES%3C/text%3E%3Ctext x='-50' y='5' text-anchor='middle' class='map-text' font-size='12'%3EW%3C/text%3E%3Ctext x='50' y='5' text-anchor='middle' class='map-text' font-size='12'%3EE%3C/text%3E%3C/g%3E%3C!-- Aging effect --%3E%3Crect width='1200' height='800' fill='none' filter='url(%23aged)' opacity='0.2'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: mapFloat 60s ease-in-out infinite alternate;
+}
+@media (max-width: 768px) {
+  .pirate-map { opacity: 0.12; transform: translate(-50%, -50%) rotate(-1deg) scale(1.05); }
+}
+
+@keyframes mapFloat {
+  0% { transform: translate(-50%, -50%) rotate(-2deg) scale(1); opacity: 0.08; }
+  50% { transform: translate(-49%, -51%) rotate(-1deg) scale(1.01); opacity: 0.12; }
+  100% { transform: translate(-51%, -50%) rotate(-3deg) scale(0.99); opacity: 0.08; }
+}
+
+/* ========== REVEAL ANIMATIONS ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== BOTTLE 3D EFFECT ========== */
+.bottle-container {
+  perspective: 1500px;
+  transform-style: preserve-3d;
+}
+
+.bottle-3d {
+  transition: transform 0.3s ease-out;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.2));
+}
+@media (max-width: 768px) {
+  #hero { padding-top: 3rem; padding-bottom: 3rem; }
+  #bottleContainer { min-height: 480px; }
+  #bottleImg { max-width: 90vw; }
+}
+
+.bottle-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(212,175,55,0.3), transparent 70%);
+  filter: blur(40px);
+  opacity: 0.6;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ========== LOADING ANIMATION ========== */
+.shutter {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  pointer-events: none;
+  overflow: hidden;
+  background: radial-gradient(120% 120% at 50% 20%, rgba(212,175,55,.08), transparent 40%);
+}
+
+.shutter__panel {
+  background: linear-gradient(135deg, #141211 0%, #1e1b19 60%, #2a2624 100%);
+  border-bottom: 1px solid rgba(212,175,55,.15);
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,.06);
+  transform: translateY(0);
+  animation: shutterUp 1.6s cubic-bezier(.65,.02,.2,1) forwards;
+}
+
+.shutter__logo {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.shutter__logo-inner {
+  padding: 1rem 1.25rem;
+  border-radius: 999px;
+  background: rgba(0,0,0,.2);
+  border: 1px solid rgba(212,175,55,.35);
+  box-shadow: 0 10px 40px rgba(0,0,0,.35), 0 0 60px rgba(212,175,55,.15);
+  transform: translateY(10px) scale(.98);
+  opacity: 0;
+  animation: logoIntro 3.2s ease-out .25s both;
+}
+.shutter__logo-text {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  letter-spacing: .5px;
+  font-size: clamp(24px, 5vw, 44px);
+  background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 4px 24px rgba(212,175,55,.25);
+}
+@keyframes logoIntro {
+  0% { opacity: 0; transform: translateY(12px) scale(.96); }
+  40% { opacity: 1; transform: translateY(0) scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-6px) scale(.995); }
+}
+
+@keyframes shutterUp { to { transform: translateY(-110%); } }
+
+/* ========== SCROLL PROGRESS BAR ========== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #D4AF37, #FF8C00);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 1000;
+  transition: transform 0.1s ease-out;
+}
+
+/* ========== FLOATING ELEMENTS ========== */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.floating { animation: float 6s ease-in-out infinite; }
+.floating-slow { animation: float 8s ease-in-out infinite; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .stat-number { font-size: 2rem; }
+  .testimonial-card { padding: 1.25rem; }
+  .slider-nav { width: 36px; height: 36px; }
+  .slider-dots { bottom: 12px; }
+  h1.serif { font-size: 2.5rem; line-height: 1.1; }
+  #hero .inline-flex { transform: scale(.95); }
+}

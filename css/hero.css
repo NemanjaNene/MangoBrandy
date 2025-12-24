@@ -1,0 +1,55 @@
+/* ==========================================
+   HERO SECTION STYLES
+   ========================================== */
+
+/* ========== BOTTLE 3D EFFECT ========== */
+.bottle-container {
+  perspective: 1500px;
+  transform-style: preserve-3d;
+}
+
+.bottle-3d {
+  transition: transform 0.3s ease-out;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.2));
+}
+
+@media (max-width: 768px) {
+  #hero { 
+    padding-top: 3rem; 
+    padding-bottom: 3rem; 
+  }
+  #bottleContainer { 
+    min-height: 480px; 
+  }
+  #bottleImg { 
+    max-width: 90vw; 
+  }
+}
+
+.bottle-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(212,175,55,0.3), transparent 70%);
+  filter: blur(40px);
+  opacity: 0.6;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ========== FLOATING ANIMATION ========== */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-20px); 
+  }
+}
+
+.floating { 
+  animation: float 6s ease-in-out infinite; 
+}
+
+.floating-slow { 
+  animation: float 8s ease-in-out infinite; 
+}
