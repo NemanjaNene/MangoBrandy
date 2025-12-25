@@ -20,6 +20,7 @@ function initApp() {
   initConfetti();
   initBottleImageFallback();
   initCountingAnimation();
+  initNewsletter();
   
   console.log('✅ App initialized successfully!');
 }
@@ -462,6 +463,47 @@ function animateNumber(element) {
     
     element.textContent = displayValue;
   }, frameRate);
+}
+
+// ============ NEWSLETTER FAKE SUBMIT ============
+function initNewsletter() {
+  const btn = document.getElementById('newsletterBtn');
+  const input = document.getElementById('newsletterEmail');
+  const form = document.getElementById('newsletterForm');
+  const success = document.getElementById('newsletterSuccess');
+  const label = document.getElementById('newsletterLabel');
+  
+  if (!btn || !input) return;
+  
+  btn.addEventListener('click', () => {
+    const email = input.value.trim();
+    
+    // Basic email validation
+    if (!email || !email.includes('@')) {
+      input.style.borderColor = '#FF8C00';
+      input.placeholder = 'Please enter a valid email';
+      setTimeout(() => {
+        input.style.borderColor = '';
+        input.placeholder = 'Your email';
+      }, 2000);
+      return;
+    }
+    
+    // Show success message
+    form.classList.add('hidden');
+    label.classList.add('hidden');
+    success.classList.remove('hidden');
+    
+    // Optional: Log email (you can collect these later)
+    console.log('Newsletter signup:', email);
+  });
+  
+  // Submit on Enter key
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      btn.click();
+    }
+  });
 }
 
 // ============ SUPPRESS IMAGE ERRORS ============

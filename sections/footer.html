@@ -76,15 +76,16 @@
         
         <!-- Newsletter -->
         <div class="mt-6">
-          <p class="text-sm text-ink/60 mb-3">Join our exclusive list</p>
-          <div class="flex gap-2">
-            <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-full bg-white/50 border border-gold/20 focus:outline-none focus:border-gold text-sm">
-            <button class="btn btn-primary text-sm px-6 py-2" aria-label="Subscribe">
+          <p class="text-sm text-ink/60 mb-3" id="newsletterLabel">Join our exclusive list</p>
+          <div class="flex gap-2" id="newsletterForm">
+            <input type="email" id="newsletterEmail" placeholder="Your email" class="flex-1 px-4 py-2 rounded-full bg-white/50 border border-gold/20 focus:outline-none focus:border-gold text-sm">
+            <button id="newsletterBtn" class="btn btn-primary text-sm px-6 py-2" aria-label="Subscribe">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
             </button>
           </div>
+          <p id="newsletterSuccess" class="text-sm text-gold mt-3 hidden">✓ Thanks! We'll be in touch soon.</p>
         </div>
       </div>
     </div>
