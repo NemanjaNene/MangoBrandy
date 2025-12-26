@@ -1,13 +1,13 @@
 /**
  * ==========================================
- * MANGO SPIRIT - MAIN APPLICATION
+ * JOYFRUITS - MAIN APPLICATION
  * ==========================================
  * Sve JavaScript funkcionalnosti sajta
  */
 
 // Glavna inicijalizacija nakon učitavanja sekcija
 function initApp() {
-  console.log('🎯 Initializing Mango Spirit app...');
+  console.log('🎯 Initializing JoyFruits app...');
   
   initYear();
   initScrollProgress();
@@ -21,6 +21,8 @@ function initApp() {
   initBottleImageFallback();
   initCountingAnimation();
   initNewsletter();
+  initLazyVideos();
+  initMediaOptimization();
   
   console.log('✅ App initialized successfully!');
 }
@@ -362,48 +364,11 @@ function initConfetti() {
 }
 
 // ============ BOTTLE IMAGE FALLBACK ============
+// Disabled - using custom product images instead
 function initBottleImageFallback() {
-  const el = document.getElementById('bottleImg');
-  if (!el) return;
-  
-  const candidates = [
-    './Mango.png','./mango.png',
-    './assets/bottles/Mango.png','./assets/bottles/mango.png',
-    './assets/Mango.png','./assets/mango.png',
-    '/Mango.png','/mango.png','/assets/bottles/Mango.png','/assets/Mango.png'
-  ];
-  
-  const FALLBACK = "data:image/svg+xml;utf8," + encodeURIComponent(`<?xml version='1.0'?>
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 900'>
-    <defs>
-        <linearGradient id='bottleGrad' x1='0' y1='0' x2='0' y2='1'>
-          <stop offset='0%' stop-color='%23FFE5B4'/>
-          <stop offset='50%' stop-color='%23FFDAB9'/>
-          <stop offset='100%' stop-color='%23F4A460'/>
-      </linearGradient>
-        <filter id='glow'><feGaussianBlur stdDeviation='4'/></filter>
-    </defs>
-      <rect x='80' y='60' width='240' height='720' rx='60' fill='url(%23bottleGrad)' stroke='%23D4AF37' stroke-width='3'/>
-      <rect x='140' y='10' width='120' height='70' rx='15' fill='%23B8860B'/>
-      <circle cx='200' cy='45' r='8' fill='%23FFD700'/>
-      <text x='200' y='420' font-family='Playfair Display,serif' font-weight='700' font-size='72' text-anchor='middle' fill='%23FFFFFF' opacity='0.9'>M</text>
-      <text x='200' y='520' font-family='Inter,sans-serif' font-weight='600' font-size='32' text-anchor='middle' fill='%23FFFFFF' opacity='0.85'>SPIRIT</text>
-      <circle cx='200' cy='600' r='80' fill='none' stroke='%23FFFFFF' stroke-width='2' opacity='0.3'/>
-  </svg>`);
-  
-  function tryNext(i) {
-    if (i >= candidates.length) { 
-      el.src = FALLBACK; 
-      return; 
-    }
-    const test = new Image();
-    test.onload = () => { el.src = candidates[i]; };
-    test.onerror = () => tryNext(i + 1);
-    test.src = candidates[i];
-  }
-  
-  el.addEventListener('error', () => tryNext(1), { once: true });
-  tryNext(0);
+  // Function disabled - keeping hero image as set in HTML
+  console.log('✅ Using custom hero image');
+  return;
 }
 
 // ============ COUNTING ANIMATION (Stats) ============
@@ -504,6 +469,94 @@ function initNewsletter() {
       btn.click();
     }
   });
+}
+
+// ============ LAZY LOAD VIDEOS ============
+function initLazyVideos() {
+  const videos = document.querySelectorAll('video[preload="metadata"]');
+  
+  if ('IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const video = entry.target;
+          // Load video when it comes into view
+          if (video.readyState === 0) {
+            video.load();
+          }
+          videoObserver.unobserve(video);
+        }
+      });
+    }, {
+      rootMargin: '50px'
+    });
+    
+    videos.forEach(video => videoObserver.observe(video));
+  } else {
+    // Fallback for browsers without IntersectionObserver
+    videos.forEach(video => video.load());
+  }
+}
+
+// ============ MEDIA OPTIMIZATION ============
+function initMediaOptimization() {
+  // Optimize images with lazy loading
+  const images = document.querySelectorAll('img[loading="lazy"]');
+  images.forEach(img => {
+    img.addEventListener('load', () => {
+      img.style.opacity = '1';
+    }, { once: true });
+  });
+  
+  // Pause videos when not in viewport
+  const videos = document.querySelectorAll('video');
+  if ('IntersectionObserver' in window) {
+    const videoPlayObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        if (!entry.isIntersecting && !video.paused) {
+          video.pause();
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+    
+    videos.forEach(video => {
+      videoPlayObserver.observe(video);
+      
+      // Optimize video playback
+      video.addEventListener('play', () => {
+        videos.forEach(otherVideo => {
+          if (otherVideo !== video && !otherVideo.paused) {
+            otherVideo.pause();
+          }
+        });
+      });
+    });
+  }
+  
+  // Preconnect to video sources
+  const videoSources = new Set();
+  videos.forEach(video => {
+    const source = video.querySelector('source');
+    if (source) {
+      const url = new URL(source.src, window.location.href);
+      videoSources.add(url.origin);
+    }
+  });
+  
+  // Add preconnect links for better performance
+  videoSources.forEach(origin => {
+    if (origin !== window.location.origin) {
+      const link = document.createElement('link');
+      link.rel = 'preconnect';
+      link.href = origin;
+      document.head.appendChild(link);
+    }
+  });
+  
+  console.log('📹 Media optimization initialized');
 }
 
 // ============ SUPPRESS IMAGE ERRORS ============

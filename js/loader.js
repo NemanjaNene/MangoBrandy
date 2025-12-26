@@ -33,6 +33,7 @@ async function loadAllSections() {
       loadSection('process', 'process.html'),
       loadSection('voyage', 'voyage.html'),
       loadSection('product', 'product.html'),
+      loadSection('gallery', 'gallery.html'),
       loadSection('testimonials', 'testimonials.html'),
       loadSection('cta', 'cta.html'),
       loadSection('footer', 'footer.html'),

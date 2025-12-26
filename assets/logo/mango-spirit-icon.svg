@@ -1,0 +1,43 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle (optional) -->
+  <circle cx="50" cy="50" r="48" fill="#FAF6F0" stroke="#D4AF37" stroke-width="2"/>
+  
+  <!-- Mango Icon -->
+  <g transform="translate(25, 20)">
+    <!-- Main Mango Shape -->
+    <path d="M25 10 C40 3, 55 5, 60 25 C63 38, 56 52, 38 58 C22 62, 10 52, 10 35 C10 20, 16 14, 25 10 Z" 
+          fill="url(#mangoGrad)" 
+          stroke="#FF8C00" 
+          stroke-width="2.5"/>
+    
+    <!-- Leaf -->
+    <path d="M32 7 C36 5, 42 5, 46 10 C49 14, 48 20, 44 23 C40 26, 34 25, 31 21 C28 17, 29 10, 32 7 Z" 
+          fill="#4A7C59" 
+          stroke="#2D5A3D" 
+          stroke-width="1.5"/>
+    
+    <!-- Leaf vein -->
+    <path d="M38 10 L40 20" stroke="#3D6B4D" stroke-width="1" stroke-linecap="round"/>
+    
+    <!-- Highlight -->
+    <ellipse cx="28" cy="32" rx="8" ry="16" 
+             fill="white" 
+             opacity="0.3" 
+             transform="rotate(-25 28 32)"/>
+    
+    <!-- Small shine spots -->
+    <circle cx="23" cy="26" r="4" fill="white" opacity="0.5"/>
+    <circle cx="35" cy="40" r="3" fill="white" opacity="0.3"/>
+  </g>
+  
+  <!-- Gradient -->
+  <defs>
+    <linearGradient id="mangoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#FFB84D;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#FF8C00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B00;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
+

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mango Spirit - Logo Preview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #FAF6F0 0%, #F0E8D8 100%);
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 {
+      text-align: center;
+      color: #1a1816;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 900;
+    }
+    .subtitle {
+      text-align: center;
+      color: #B8860B;
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+    }
+    .card-title {
+      color: #1a1816;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .card-subtitle {
+      color: #B8860B;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 150px;
+      background: linear-gradient(135deg, #FAF6F0 0%, #FFF8E7 100%);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+      border: 2px dashed rgba(212, 175, 55, 0.2);
+    }
+    .logo-container img {
+      max-width: 100%;
+      height: auto;
+    }
+    .info {
+      font-size: 0.85rem;
+      color: #4A4845;
+      line-height: 1.6;
+    }
+    .info strong {
+      color: #1a1816;
+      display: block;
+      margin-top: 8px;
+    }
+    .badge {
+      display: inline-block;
+      background: #D4AF37;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    .badge.primary { background: #FF8C00; }
+    .usage-section {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      margin-top: 40px;
+    }
+    .usage-section h2 {
+      color: #1a1816;
+      margin-bottom: 20px;
+    }
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .usage-item {
+      padding: 16px;
+      background: #FAF6F0;
+      border-radius: 8px;
+      border-left: 4px solid #D4AF37;
+    }
+    .usage-item strong {
+      color: #1a1816;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .usage-item span {
+      color: #4A4845;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🥭 Mango Spirit Logo System</h1>
+    <p class="subtitle">5 Professional Logo Variations - Production Ready</p>
+
+    <div class="grid">
+      <!-- Logo 1 - Compact -->
+      <div class="card">
+        <h3 class="card-title">Compact Logo</h3>
+        <p class="card-subtitle">Header & Footer</p>
+        <div class="logo-container">
+          <img src="mango-spirit-logo-compact.svg" alt="Compact Logo" style="height: 50px;">
+        </div>
+        <div class="info">
+          <strong>📐 Dimensions:</strong> 180x50px
+          <strong>💼 Usage:</strong> Navigation bar, Footer
+          <strong>✨ Features:</strong> Mango icon + text + tagline
+          <span class="badge primary">CURRENTLY IN USE</span>
+        </div>
+      </div>
+
+      <!-- Logo 2 - Horizontal -->
+      <div class="card">
+        <h3 class="card-title">Horizontal Logo</h3>
+        <p class="card-subtitle">Marketing Materials</p>
+        <div class="logo-container">
+          <img src="mango-spirit-logo-horizontal.svg" alt="Horizontal Logo" style="height: 70px;">
+        </div>
+        <div class="info">
+          <strong>📐 Dimensions:</strong> 220x70px
+          <strong>💼 Usage:</strong> Banners, Presentations, Print
+          <strong>✨ Features:</strong> Decorative frame, luxurious
+          <span class="badge">PREMIUM</span>
+        </div>
+      </div>
+
+      <!-- Logo 3 - Icon -->
+      <div class="card">
+        <h3 class="card-title">Icon Logo</h3>
+        <p class="card-subtitle">Social Media</p>
+        <div class="logo-container">
+          <img src="mango-spirit-icon.svg" alt="Icon Logo" style="height: 100px;">
+        </div>
+        <div class="info">
+          <strong>📐 Dimensions:</strong> 100x100px
+          <strong>💼 Usage:</strong> Profile pictures, App icon
+          <strong>✨ Features:</strong> Circular background, detailed
+          <span class="badge">SOCIAL</span>
+        </div>
+      </div>
+
+      <!-- Logo 4 - Favicon -->
+      <div class="card">
+        <h3 class="card-title">Favicon</h3>
+        <p class="card-subtitle">Browser Tab</p>
+        <div class="logo-container">
+          <img src="favicon.svg" alt="Favicon" style="height: 32px;">
+        </div>
+        <div class="info">
+          <strong>📐 Dimensions:</strong> 32x32px
+          <strong>💼 Usage:</strong> Browser tab, Bookmarks
+          <strong>✨ Features:</strong> Simplified, optimized
+          <span class="badge primary">ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- Logo 5 - Original -->
+      <div class="card">
+        <h3 class="card-title">Original Logo</h3>
+        <p class="card-subtitle">Base Version</p>
+        <div class="logo-container">
+          <img src="mango-spirit-logo.svg" alt="Original Logo" style="height: 60px;">
+        </div>
+        <div class="info">
+          <strong>📐 Dimensions:</strong> 180x60px
+          <strong>💼 Usage:</strong> Base template version
+          <strong>✨ Features:</strong> Simple, clean design
+          <span class="badge">ORIGINAL</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Current Usage -->
+    <div class="usage-section">
+      <h2>🎯 Current Implementation</h2>
+      <div class="usage-grid">
+        <div class="usage-item">
+          <strong>Header Navigation</strong>
+          <span>mango-spirit-logo-compact.svg</span>
+        </div>
+        <div class="usage-item">
+          <strong>Footer Section</strong>
+          <span>mango-spirit-logo-compact.svg</span>
+        </div>
+        <div class="usage-item">
+          <strong>Browser Favicon</strong>
+          <span>favicon.svg</span>
+        </div>
+        <div class="usage-item">
+          <strong>Apple Touch Icon</strong>
+          <span>mango-spirit-icon.svg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color Palette -->
+    <div class="usage-section">
+      <h2>🎨 Color Palette</h2>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px;">
+        <div style="flex: 1; min-width: 120px; text-align: center;">
+          <div style="height: 80px; background: #FF8C00; border-radius: 8px; margin-bottom: 8px;"></div>
+          <strong style="font-size: 0.9rem;">#FF8C00</strong><br>
+          <span style="font-size: 0.8rem; color: #666;">Mango Orange</span>
+        </div>
+        <div style="flex: 1; min-width: 120px; text-align: center;">
+          <div style="height: 80px; background: #4A7C59; border-radius: 8px; margin-bottom: 8px;"></div>
+          <strong style="font-size: 0.9rem;">#4A7C59</strong><br>
+          <span style="font-size: 0.8rem; color: #666;">Leaf Green</span>
+        </div>
+        <div style="flex: 1; min-width: 120px; text-align: center;">
+          <div style="height: 80px; background: #D4AF37; border-radius: 8px; margin-bottom: 8px;"></div>
+          <strong style="font-size: 0.9rem;">#D4AF37</strong><br>
+          <span style="font-size: 0.8rem; color: #666;">Gold Accent</span>
+        </div>
+        <div style="flex: 1; min-width: 120px; text-align: center;">
+          <div style="height: 80px; background: #1a1816; border-radius: 8px; margin-bottom: 8px;"></div>
+          <strong style="font-size: 0.9rem;">#1a1816</strong><br>
+          <span style="font-size: 0.8rem; color: #666;">Dark Ink</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align: center; margin-top: 40px; color: #B8860B;">
+      📖 For detailed information, see <strong>LOGO-INFO.md</strong>
+    </p>
+  </div>
+</body>
+</html>
+

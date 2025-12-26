@@ -1,7 +1,7 @@
 #!/bin/bash
 # Mango Spirit - Local Development Server
 
-echo "🥭 Starting Mango Spirit..."
+echo "🥭 Starting JoyFruits..."
 echo "📂 Project: $(pwd)"
 echo "🌐 Opening: http://localhost:8000"
 echo ""
