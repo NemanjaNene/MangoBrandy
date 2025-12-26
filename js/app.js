@@ -12,7 +12,7 @@ function initApp() {
   initYear();
   initScrollProgress();
   initRevealAnimations();
-  initShutter();
+  // initShutter(); // ПРИВРЕМЕНО ИСКЉУЧЕНО
   initSlider();
   initMobileMenu();
   init3DBottle();
@@ -67,18 +67,25 @@ function initShutter() {
   const shutter = document.getElementById('shutter');
   if (!shutter) return;
   
-  if (sessionStorage.getItem('shutterPlayed')) {
-    shutter.remove();
-    return;
-  }
+  // Не чувамо у sessionStorage - приказујемо сваки пут
+  // if (sessionStorage.getItem('shutterPlayed')) {
+  //   shutter.remove();
+  //   return;
+  // }
   
   const panels = shutter.querySelectorAll('.shutter__panel');
   const lastPanel = panels[panels.length - 1];
   
-  lastPanel.addEventListener('animationend', () => {
-    shutter.remove();
-    sessionStorage.setItem('shutterPlayed', '1');
-  }, { once: true });
+  // Чекамо да се комплетно заврши анимација (3.5s укупно)
+  setTimeout(() => {
+    shutter.style.opacity = '0';
+    shutter.style.transition = 'opacity 0.5s ease-out';
+    
+    setTimeout(() => {
+      shutter.remove();
+      // sessionStorage.setItem('shutterPlayed', '1');
+    }, 500);
+  }, 3500);
 }
 
 // ============ IMAGE SLIDER ============
