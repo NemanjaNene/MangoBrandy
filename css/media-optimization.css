@@ -24,6 +24,15 @@ video {
   background: linear-gradient(135deg, #FAF6F0 0%, #F0E8D8 100%);
 }
 
+/* Сакриј volume контроле - видео увек без звука */
+video::-webkit-media-controls-mute-button {
+  display: none;
+}
+
+video::-webkit-media-controls-volume-slider {
+  display: none;
+}
+
 video::-webkit-media-controls-panel {
   background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.7));
 }
